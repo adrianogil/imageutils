@@ -1,0 +1,1 @@
+alias dip-list-images='python2 $IMAGE_UTILS_DIR/list_images.py'
