@@ -7,6 +7,11 @@ from PIL import Image
 
 input_path = sys.argv[1]
 
+if len(sys.argv) >= 3 and sys.argv[2] == '-v':
+    verbose_mode = True
+else:
+    verbose_mode = False
+
 all_images = {}
 
 def parse_file(file_path):
@@ -34,7 +39,8 @@ parse_project(input_path, ('.jpg', '.jpeg', '.gif', '.png'))
 for i in all_images:
     print(i + ":  (" + str(len(all_images[i])) + ' images)' )
     for a in all_images[i]:
-        print('\t\t' + a)
+        if verbose_mode:
+            print('\t\t' + a)
 
 # def get_key(item):
 #     return int(item[0])
