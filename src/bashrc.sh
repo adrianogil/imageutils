@@ -5,6 +5,25 @@ alias dip-histogram='python3 $IMAGE_UTILS_DIR/python/dip/color_histogram.py'
 alias dip-crop='python3 $IMAGE_UTILS_DIR/python/dip/crop.py'
 alias dip-grid='python3 $IMAGE_UTILS_DIR/python/dip/grid.py'
 
+function dip-gen-icns-from-img()
+{
+    target_image_file=$1
+
+    mkdir MyIcon.iconset
+    sips -z 16 16     ${target_image_file} --out MyIcon.iconset/icon_16x16.png
+    sips -z 32 32     ${target_image_file} --out MyIcon.iconset/icon_16x16@2x.png
+    sips -z 32 32     ${target_image_file} --out MyIcon.iconset/icon_32x32.png
+    sips -z 64 64     ${target_image_file} --out MyIcon.iconset/icon_32x32@2x.png
+    sips -z 128 128   ${target_image_file} --out MyIcon.iconset/icon_128x128.png
+    sips -z 256 256   ${target_image_file} --out MyIcon.iconset/icon_128x128@2x.png
+    sips -z 256 256   ${target_image_file} --out MyIcon.iconset/icon_256x256.png
+    sips -z 512 512   ${target_image_file} --out MyIcon.iconset/icon_256x256@2x.png
+    sips -z 512 512   ${target_image_file} --out MyIcon.iconset/icon_512x512.png
+    iconutil -c icns MyIcon.iconset
+    rm -R MyIcon.iconset
+}
+
+
 function dip-background-transparent()
 {
     target_image=$1
