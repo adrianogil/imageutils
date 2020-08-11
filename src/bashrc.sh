@@ -5,6 +5,15 @@ alias dip-histogram='python3 $IMAGE_UTILS_DIR/python/dip/color_histogram.py'
 alias dip-crop='python3 $IMAGE_UTILS_DIR/python/dip/crop.py'
 alias dip-grid='python3 $IMAGE_UTILS_DIR/python/dip/grid.py'
 
+
+function dip-rotate-image()
+{
+    target_image=$1
+    output_image=$2
+
+    convert "${target_image}" -rotate 90 "${output_image}"
+}
+
 function dip-gen-icns-from-img()
 {
     target_image_file=$1
