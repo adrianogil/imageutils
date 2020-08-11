@@ -1,10 +1,14 @@
-import os
-import sys
-import fnmatch
 from os.path import join
 from PIL import Image
 
-input_path = sys.argv[1]
+import sys
+import os
+
+
+if len(sys.argv) == 1:
+    input_path = "."
+else:
+    input_path = sys.argv[1]
 
 verbose_mode = '-v' in sys.argv
 

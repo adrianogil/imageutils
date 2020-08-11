@@ -1,4 +1,4 @@
-alias dip-list-images='python2 $IMAGE_UTILS_DIR/list_images.py'
+alias dip-list-images='python3 $IMAGE_UTILS_DIR/list_images.py'
 alias dip-switch-color='python3 $IMAGE_UTILS_DIR/python/dip/switch_color.py'
 alias dip-switch-color-dist='python3 $IMAGE_UTILS_DIR/python/dip/switch_color_distance.py'
 alias dip-histogram='python3 $IMAGE_UTILS_DIR/python/dip/color_histogram.py'
@@ -40,10 +40,16 @@ function dip-show-colors-in-point-cloud()
 {
     target_image=$1
     current_dir=$PWD
+    target_port=5353
 
     cp $target_image $COLORS_IN_POINT_CLOUD_DIR/target_images/
 
-    open http://localhost:5353?image=target_images/$target_image
+    cd $COLORS_IN_POINT_CLOUD_DIR
+    simple-server ${target_port}
+
+    cd ${current_dir}
+
+    open http://localhost:${target_port}?image=target_images/${target_image}
 }
 
 function dip-gif-frame-reduce()
