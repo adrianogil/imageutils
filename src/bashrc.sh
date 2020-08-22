@@ -4,6 +4,8 @@ alias dip-switch-color-dist='python3 $IMAGE_UTILS_DIR/python/dip/switch_color_di
 alias dip-histogram='python3 $IMAGE_UTILS_DIR/python/dip/color_histogram.py'
 alias dip-crop='python3 $IMAGE_UTILS_DIR/python/dip/crop.py'
 alias dip-grid='python3 $IMAGE_UTILS_DIR/python/dip/grid.py'
+alias dip-create-image='python3 $IMAGE_UTILS_DIR/python/dip/create_image.py'
+alias mkimage='python3 $IMAGE_UTILS_DIR/python/dip/create_image.py'
 
 
 function dip-rotate-image()
