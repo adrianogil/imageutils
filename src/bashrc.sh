@@ -16,6 +16,16 @@ function dip-rotate-image()
     convert "${target_image}" -rotate 90 "${output_image}"
 }
 
+function dip-scale-image()
+{
+    target_image=$1
+    output_image=$2
+    target_scale=$3
+
+    convert "${target_image}" -resize ${target_scale} "${output_image}"
+}
+
+
 function dip-gen-icns-from-img()
 {
     target_image_file=$1
