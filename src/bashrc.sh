@@ -6,7 +6,7 @@ alias dip-crop='python3 $IMAGE_UTILS_DIR/python/dip/crop.py'
 alias dip-grid='python3 $IMAGE_UTILS_DIR/python/dip/grid.py'
 alias dip-create-image='python3 $IMAGE_UTILS_DIR/python/dip/create_image.py'
 alias mkimage='python3 $IMAGE_UTILS_DIR/python/dip/create_image.py'
-
+alias dip-lego-image='python3 $IMAGE_UTILS_DIR/python/dip/lego/conv_lego_image.py'
 
 function dip-rotate-image()
 {
