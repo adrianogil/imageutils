@@ -98,3 +98,9 @@ function dip-gif-frame-reduce()
         let i=i+1
     done
 }
+
+function img-conv-from-base64(){
+    target_file=$1
+    python3 $IMAGE_UTILS_DIR/python/imageutils/conv/conv_from_base64.py ${target_file}
+}
+
