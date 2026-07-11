@@ -50,6 +50,8 @@ python src/list_images.py ./photos -v
 ```bash
 python src/python/dip/crop.py <input> <output> <x0,y0,x1,y1>
 ```
+Coordinates outside the image are clamped to the image bounds. Boxes that do not overlap the image are rejected.
+
 Example:
 ```bash
 python src/python/dip/crop.py in.png out.png 10,20,200,180
