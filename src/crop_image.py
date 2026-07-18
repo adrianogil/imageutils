@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageOps
 
 import os
 
@@ -14,19 +14,22 @@ def crop(image_path, crop_horizontal, crop_vertical, save_path = ""):
     image_basename = image_splitext[0]
     image_extension = image_splitext[1]
 
-    img = Image.open(image_path)
-    img_width, img_height = img.size
+    with Image.open(image_path) as source_image:
+        img = ImageOps.exif_transpose(source_image)
+        img_width, img_height = img.size
 
-    crop_width = img_width / crop_horizontal
-    crop_height = img_height / crop_vertical
+        crop_width = img_width / crop_horizontal
+        crop_height = img_height / crop_vertical
 
-    for i in range(0, crop_horizontal):
-        for j in range(0, crop_vertical):
-            box = (i*crop_width, j*crop_height, (i+1)*crop_width, (j+1)*crop_height)
-            a = img.crop(box)
-            a.load()
-            a.save(save_path + image_basename + "_" + str(i) + "_" + str(j) + image_extension)
-            a.close()
+        for i in range(0, crop_horizontal):
+            for j in range(0, crop_vertical):
+                box = (i*crop_width, j*crop_height, (i+1)*crop_width, (j+1)*crop_height)
+                a = img.crop(box)
+                a.load()
+                a.save(save_path + image_basename + "_" + str(i) + "_" + str(j) + image_extension)
+                a.close()
+
+        img.close()
 
 if __name__ == "__main__":
     import sys

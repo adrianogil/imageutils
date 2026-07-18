@@ -1,5 +1,6 @@
-from PIL import Image
 import sys
+
+from dip.orientation import open_oriented_image
 
 
 def convert_from_str(list_str):
@@ -37,7 +38,7 @@ def clamp_bounding_box(boundingbox, image_size):
 
 
 def crop_image(target_image, output_image, boundingbox):
-    with Image.open(target_image) as image:
+    with open_oriented_image(target_image) as image:
         clamped_box = clamp_bounding_box(boundingbox, image.size)
         cropped_image = image.crop(clamped_box)
         cropped_image.save(output_image)

@@ -7,6 +7,8 @@ import argparse
 from typing import List, Tuple
 from PIL import Image  # for image loading, resizing, and pixel access
 
+from dip.orientation import open_oriented_image
+
 
 class LegoColor:
     def __init__(self, hex_code: str, lego_id: int, name: str, r: int, g: int, b: int):
@@ -55,10 +57,11 @@ def calculate_distance(p1: Tuple[int, int, int], p2: Tuple[int, int, int]) -> fl
                      ((p2[2]-p1[2]) * 0.11)**2)
 
 def resize_image(input_path: str, x_len: int, y_len: int) -> Image.Image:
-    img = Image.open(input_path).convert("RGBA")
-    # Use nearest neighbor to mimic original behavior
-    resized = img.resize((x_len, y_len), resample=Image.Resampling.NEAREST)
-    return resized
+    with open_oriented_image(input_path) as img:
+        img = img.convert("RGBA")
+        # Use nearest neighbor to mimic original behavior
+        resized = img.resize((x_len, y_len), resample=Image.Resampling.NEAREST)
+        return resized
 
 def map_image_to_lego(img: Image.Image, colors: List[LegoColor], block_size: int) -> Tuple[Image.Image, List[List[str]]]:
     width, height = img.size
@@ -168,7 +171,7 @@ def main():
 
     # If xlen or ylen aren't provided, use original image size
     if not args.xlen or not args.ylen:
-        with Image.open(args.image) as tmp_img:
+        with open_oriented_image(args.image) as tmp_img:
             args.xlen, args.ylen = tmp_img.size
     if args.scale:
         args.xlen = int(args.xlen * args.scale)
